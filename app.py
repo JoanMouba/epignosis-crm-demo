@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import sqlite3, os
 
 app = Flask(__name__)
-app.secret_key = "epignosis-crm-secret-2026"
+import os
+app.secret_key = os.environ.get("SECRET_KEY", "epignosis-crm-secret-dev-2026")
 DB = os.path.join(os.path.dirname(__file__), "crm.db")
 
 VALID_EMAIL    = "admin@fakeemail.com"
@@ -143,6 +144,9 @@ def delete_customer(cid):
 
 # ── Lancement ─────────────────────────────────────────────────────
 
-if __name__ == "__main__":
+# Initialisation DB au démarrage (fonctionne avec gunicorn ET python app.py)
+with app.app_context():
     init_db()
+
+if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)

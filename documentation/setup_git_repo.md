@@ -20,3 +20,22 @@ git push -u origin main
 git remote add origin https://github.com/JoanMouba/epignosis-crm-demo.git
 git branch -M main
 git push -u origin main
+
+--- Structure du repo ---
+epignosis_crm/
+├── app.py              ← fonctionne local ET Render
+├── requirements.txt    ← flask + gunicorn
+├── Procfile            ← utilisé par Render uniquement (ignoré en local)
+├── render.yaml         ← utilisé par Render uniquement (ignoré en local)
+├── .gitignore          ← utilisé par GitHub uniquement (ignoré en local)
+├── templates/          ← identique local et Render
+└── rf_resources/       ← identique local et Render
+
+--- Pour démarrer en local maintenant ---
+# 1. Extraire le zip
+# 2. Ouvrir un terminal dans le dossier epignosis_crm/
+
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python app.py
