@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" id="loginform">
+  <h2>Ajouter un Client</h2>
+
+  {% if success %}
+  <div id="Success" class="alert-success">
+    Succès – Nouveau Client Ajouté
+  </div>
+  {% endif %}
+
+  {% if error %}
+  <div class="alert-error">{{ error }}</div>
+  {% endif %}
+
+  <form method="POST" action="/new-customer">
+
+    <div class="form-group">
+      <label for="EmailAddress">Adresse email *</label>
+      <input type="email" id="EmailAddress" name="EmailAddress"
+             placeholder="prenom.nom@email.fr"/>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div class="form-group">
+        <label for="FirstName">Prénom *</label>
+        <input type="text" id="FirstName" name="FirstName" placeholder="Marie"/>
+      </div>
+      <div class="form-group">
+        <label for="LastName">Nom *</label>
+        <input type="text" id="LastName" name="LastName" placeholder="Dupont"/>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+      <div class="form-group">
+        <label for="City">Ville *</label>
+        <input type="text" id="City" name="City" placeholder="Paris, Lyon, Bordeaux…"/>
+      </div>
+      <div class="form-group">
+        <label for="StateOrRegion">Région *</label>
+        <select id="StateOrRegion" name="StateOrRegion">
+          {% for code, label in regions %}
+          <option value="{{ code }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Genre *</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="gender" value="female"/> Femme
+        </label>
+        <label>
+          <input type="radio" name="gender" value="male"/> Homme
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" id="promos-name" name="promos-name"/>
+        Souhaite recevoir les promotions
+      </label>
+    </div>
+
+    <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+      <button type="submit" id="submit-id" class="btn btn-success">
+        Enregistrer le Client
+      </button>
+      <a href="/customers" class="btn btn-primary">Annuler</a>
+    </div>
+
+  </form>
+</div>
+
+<div class="card" style="background:#fffbf0; border-color:#f0a500;">
+  <h2 style="font-size:1rem; color:#b07800;">Données de test suggérées</h2>
+  <table style="font-size:.85rem;">
+    <thead><tr>
+      <th style="background:#b07800;">Email</th>
+      <th style="background:#b07800;">Prénom</th>
+      <th style="background:#b07800;">Nom</th>
+      <th style="background:#b07800;">Ville</th>
+      <th style="background:#b07800;">Région</th>
+      <th style="background:#b07800;">Genre</th>
+      <th style="background:#b07800;">Promos</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>laura.martin@test.fr</td><td>Laura</td><td>Martin</td><td>Paris</td><td>IDF</td><td>female</td><td>oui</td></tr>
+      <tr><td>jean.dupont@test.fr</td><td>Jean</td><td>Dupont</td><td>Lyon</td><td>ARA</td><td>male</td><td>non</td></tr>
+      <tr><td>emma.petit@test.fr</td><td>Emma</td><td>Petit</td><td>Marseille</td><td>PAC</td><td>female</td><td>oui</td></tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

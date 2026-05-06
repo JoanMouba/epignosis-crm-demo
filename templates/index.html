@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="hero">
+  <h1>Les Clients Sont Notre Priorité</h1>
+  <p>Application de démonstration pour la formation Robot Framework &mdash; Epignosis Center</p>
+  <a href="/signin" class="btn btn-primary">Sign In</a>
+</div>
+
+<div class="card">
+  <h2>À propos de cette application</h2>
+  <p style="color:#555; line-height:1.7;">
+    Cette application CRM est l'environnement de test officiel du cours
+    <strong>Automatiser les Tests avec Robot Framework — Fondations</strong>.
+    Elle remplace <code>automationplayground.com/crm</code> avec des données
+    100&nbsp;% francophones : villes, régions et prénoms français.
+  </p>
+  <p style="color:#555; margin-top:.8rem;">
+    <strong>Identifiants de test :</strong>
+    Email&nbsp;: <code>admin@fakeemail.com</code> &mdash;
+    Mot de passe&nbsp;: <code>SecretSauce!25</code>
+  </p>
+</div>
+{% endblock %}

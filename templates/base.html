@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Epignosis CRM Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f4f6f9; color: #333; min-height: 100vh; }
+
+    /* NAV */
+    nav { background: #1a3a5c; color: #fff; padding: 0 2rem; display: flex; align-items: center; height: 54px; gap: 2rem; }
+    nav .brand { font-size: 1.1rem; font-weight: bold; letter-spacing: .5px; color: #fff; text-decoration: none; }
+    nav .brand span { color: #f0a500; }
+    nav a { color: #cde; text-decoration: none; font-size: .9rem; }
+    nav a:hover { color: #fff; }
+    nav .spacer { flex: 1; }
+    nav .badge { background: #f0a500; color: #1a3a5c; font-size: .75rem; font-weight: bold;
+                 padding: 2px 8px; border-radius: 10px; }
+
+    /* MAIN */
+    main { max-width: 1000px; margin: 2rem auto; padding: 0 1.5rem; }
+
+    /* HERO (page index) */
+    .hero { background: #fff; border-radius: 8px; padding: 2.5rem; text-align: center;
+            border: 1px solid #dde; margin-bottom: 1.5rem; }
+    .hero h1 { font-size: 1.8rem; color: #1a3a5c; margin-bottom: .5rem; }
+    .hero p  { color: #666; font-size: 1rem; margin-bottom: 1.5rem; }
+
+    /* CARDS */
+    .card { background: #fff; border-radius: 8px; padding: 1.5rem; border: 1px solid #dde; margin-bottom: 1.5rem; }
+    .card h2 { font-size: 1.2rem; color: #1a3a5c; margin-bottom: 1rem; }
+
+    /* ALERT */
+    .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb;
+                     padding: .75rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-weight: bold; }
+    .alert-error   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;
+                     padding: .75rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+
+    /* FORMS */
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; font-size: .9rem; font-weight: bold; margin-bottom: .3rem; color: #444; }
+    input[type=text], input[type=email], input[type=password], select {
+      width: 100%; padding: .55rem .75rem; border: 1px solid #ccc; border-radius: 5px;
+      font-size: .95rem; background: #fff; }
+    input:focus, select:focus { outline: 2px solid #2e75b6; border-color: #2e75b6; }
+    .radio-group { display: flex; gap: 1.5rem; margin-top: .3rem; }
+    .radio-group label { font-weight: normal; display: flex; align-items: center; gap: .4rem; cursor: pointer; }
+    .checkbox-group label { font-weight: normal; display: flex; align-items: center; gap: .5rem; cursor: pointer; }
+
+    /* BUTTONS */
+    .btn { display: inline-block; padding: .55rem 1.4rem; border-radius: 5px; font-size: .95rem;
+           font-weight: bold; cursor: pointer; border: none; text-decoration: none; }
+    .btn-primary { background: #2e75b6; color: #fff; }
+    .btn-primary:hover { background: #1a5a9a; }
+    .btn-success { background: #28a745; color: #fff; }
+    .btn-success:hover { background: #1e7e34; }
+    .btn-danger  { background: #dc3545; color: #fff; font-size: .8rem; padding: .3rem .7rem; }
+    .btn-danger:hover { background: #c82333; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    th { background: #1a3a5c; color: #fff; padding: .6rem .8rem; text-align: left; }
+    td { padding: .55rem .8rem; border-bottom: 1px solid #eee; }
+    tr:nth-child(even) td { background: #f9f9f9; }
+    tr:hover td { background: #eef4fb; }
+    .badge-promo { background: #28a745; color: #fff; font-size: .75rem; padding: 1px 7px; border-radius: 10px; }
+    .badge-no    { background: #aaa;    color: #fff; font-size: .75rem; padding: 1px 7px; border-radius: 10px; }
+
+    /* SIGNIN BOX */
+    .signin-box { max-width: 420px; margin: 3rem auto; background: #fff;
+                  border-radius: 8px; padding: 2rem; border: 1px solid #dde; }
+    .signin-box h2 { color: #1a3a5c; margin-bottom: 1.5rem; font-size: 1.3rem; }
+
+    /* FOOTER */
+    footer { text-align: center; color: #aaa; font-size: .8rem; padding: 2rem 0; margin-top: 2rem; }
+    footer a { color: #2e75b6; }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="brand" href="/">Epignosis <span>CRM</span> Demo</a>
+  {% if session.logged_in %}
+    <a href="/customers">Nos Clients</a>
+    <a href="/new-customer" id="new-customer">Nouveau Client</a>
+    <span class="spacer"></span>
+    <span style="font-size:.85rem; color:#acd">{{ session.email }}</span>
+    <a href="/signout">Déconnexion</a>
+  {% else %}
+    <span class="spacer"></span>
+    <a href="/signin">Sign In</a>
+  {% endif %}
+  <span class="badge">RFCP</span>
+</nav>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  Epignosis CRM Demo &mdash; Application de test pour la formation
+  <a href="https://epignosiscenter.podia.com" target="_blank">Robot Framework Fondations</a>
+  &mdash; Dr.-Ing. Joan Mouba, Formateur accrédité RFCP
+</footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+    <h2>Nos Clients Satisfaits</h2>
+    <a href="/new-customer" id="new-customer" class="btn btn-success">+ Nouveau Client</a>
+  </div>
+  <p style="color:#666; margin-bottom:1rem; font-size:.9rem;">
+    {{ customers|length }} client(s) enregistré(s)
+  </p>
+  {% if customers %}
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Ville</th>
+        <th>Région</th>
+        <th>Genre</th>
+        <th>Promos</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in customers %}
+      <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.firstname }}</td>
+        <td>{{ c.lastname }}</td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.city }}</td>
+        <td>{{ c.region }}</td>
+        <td>{{ "Femme" if c.gender == "female" else "Homme" }}</td>
+        <td>
+          {% if c.promos %}
+            <span class="badge-promo">Oui</span>
+          {% else %}
+            <span class="badge-no">Non</span>
+          {% endif %}
+        </td>
+        <td>
+          <form method="POST" action="/delete-customer/{{ c.id }}"
+                onsubmit="return confirm('Supprimer ce client ?')">
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:#999; text-align:center; padding:2rem;">Aucun client pour le moment.</p>
+  {% endif %}
+</div>
+{% endblock %}

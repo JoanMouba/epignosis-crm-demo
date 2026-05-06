@@ -1,0 +1,6 @@
+email,prenom,nom,ville,region,genre,promos
+laura.martin@test.fr,Laura,Martin,Paris,IDF,female,yes
+jean.dupont@test.fr,Jean,Dupont,Lyon,ARA,male,no
+emma.petit@test.fr,Emma,Petit,Marseille,PAC,female,yes
+thomas.leroy@test.fr,Thomas,Leroy,Toulouse,OCC,male,yes
+camille.moreau@test.fr,Camille,Moreau,Lille,HDF,female,no
